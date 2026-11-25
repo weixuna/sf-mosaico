@@ -1,0 +1,18 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+src = []
+CPPPATH = [cwd]
+
+# Each sub-directory under apps/ is an application.  A new application only
+# needs a new directory with its .c files.
+for d in os.listdir(cwd):
+    path = os.path.join(cwd, d)
+    if os.path.isdir(path):
+        src += Glob(os.path.join(d, '*.c'))
+        CPPPATH.append(path)
+
+group = DefineGroup('apps', src, depend=['PKG_USING_LITTLEVGL2RTT'], CPPPATH=CPPPATH)
+
+Return('group')

@@ -1,0 +1,17 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+src = []
+CPPPATH = [cwd]
+
+# 每个子目录是一类服务，例如 sensors/
+for d in os.listdir(cwd):
+    path = os.path.join(cwd, d)
+    if os.path.isdir(path):
+        src += Glob(os.path.join(d, '*.c'))
+        CPPPATH.append(path)
+
+group = DefineGroup('services', src, depend=[], CPPPATH=CPPPATH)
+
+Return('group')

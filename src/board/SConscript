@@ -1,0 +1,17 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+src = []
+CPPPATH = [cwd]
+
+# Each sub-directory groups one board function: display/, io/, bus/, power/ ...
+for d in os.listdir(cwd):
+    path = os.path.join(cwd, d)
+    if os.path.isdir(path):
+        src += Glob(os.path.join(d, '*.c'))
+        CPPPATH.append(path)
+
+group = DefineGroup('board', src, depend=[], CPPPATH=CPPPATH)
+
+Return('group')

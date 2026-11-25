@@ -1,0 +1,16 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+objs = []
+
+objs += SConscript(os.path.join(cwd, 'images/SConscript'),
+                   variant_dir='images', duplicate=0)
+objs += SConscript(os.path.join(cwd, 'fonts/SConscript'),
+                   variant_dir='fonts', duplicate=0)
+objs += SConscript(os.path.join(cwd, 'strings/SConscript'),
+                   variant_dir='strings', duplicate=0)
+
+group = DefineGroup('resources', objs, depend=['PKG_USING_LITTLEVGL2RTT'], CPPPATH=[cwd])
+
+Return('group')

@@ -1,0 +1,15 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+src = []
+CPPPATH = [cwd]
+
+for sub in ['io_expander', 'charger', 'imu', 'mag']:
+    path = os.path.join(cwd, sub)
+    src += Glob(os.path.join(sub, '*.c'))
+    CPPPATH.append(path)
+
+group = DefineGroup('drivers', src, depend=[], CPPPATH=CPPPATH)
+
+Return('group')

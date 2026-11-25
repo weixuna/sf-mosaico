@@ -1,0 +1,12 @@
+# Local build project (SDK, build output, flash tools)
+/project/
+
+# UI design sources and previews
+/html-mosaico-ui/
+
+# Local documentation
+/docs/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db

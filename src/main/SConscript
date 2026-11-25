@@ -1,0 +1,10 @@
+from building import *
+import os
+
+cwd = GetCurrentDir()
+src = ['main.c', 'app_main.c']
+CPPPATH = [cwd, os.path.join(cwd, 'blobs')]
+
+group = DefineGroup('main', src, depend=['PKG_USING_LITTLEVGL2RTT'], CPPPATH=CPPPATH)
+
+Return('group')
